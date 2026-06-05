@@ -1,0 +1,83 @@
+### Dataset Profiles
+
+Analytical contexts are represented through dataset profiles. A dataset profile corresponds to a specific combination of statistical, structural, and task-related characteristics that may influence the behaviour of data reduction methods.
+
+Each profile is defined as:
+
+[
+P_D=(T,L,N,Y,F,O)
+]
+
+where:
+
+| Dimension | Description              | Possible Values                   |
+| --------- | ------------------------ | --------------------------------- |
+| (T)       | Analytical Task          | Classification, Regression        |
+| (L)       | Relationship Linearity   | Linear, Non-linear                |
+| (N)       | Distribution Normality   | Normal, Non-normal                |
+| (Y)       | Feature-Type Composition | Numerical, Mixed                  |
+| (F)       | Number of Features       | Low-dimensional, High-dimensional |
+| (O)       | Number of Observations   | Small-scale, Large-scale          |
+
+These dimensions were selected because previous studies demonstrated their influence on the behaviour and applicability of data reduction methods.
+
+### Analytical Tasks
+
+Two analytical tasks are currently supported:
+
+#### Classification
+
+The target variable corresponds to a finite set of discrete classes. Reduction methods are evaluated according to their ability to preserve information relevant for classification performance while satisfying the remaining optimization objectives.
+
+#### Regression
+
+The target variable corresponds to a continuous numerical value. Reduction methods are evaluated according to their ability to preserve predictive accuracy and explanatory quality under regression-oriented evaluation criteria.
+
+### Statistical Characteristics
+
+#### Relationship Linearity
+
+This characteristic describes the relationship between explanatory variables and the target variable.
+
+* **Linear:** Relationships can be adequately represented through linear combinations of variables.
+* **Non-linear:** Relationships involve non-linear dependencies, interactions, or transformations.
+
+Certain reduction methods explicitly assume linear relationships, whereas others remain applicable under non-linear conditions.
+
+#### Distribution Normality
+
+This characteristic describes the statistical distribution of the explanatory variables.
+
+* **Normal:** Variables approximately follow Gaussian distributions.
+* **Non-normal:** Variables exhibit skewness, heavy tails, multimodality, or other departures from normality.
+
+Several reduction methods rely on assumptions related to normality and may therefore behave differently under these conditions.
+
+### Structural Characteristics
+
+#### Feature-Type Composition
+
+This characteristic describes the nature of the explanatory variables.
+
+* **Numerical:** All variables are numerical.
+* **Mixed:** The dataset contains both numerical and categorical variables.
+
+Not all reduction methods support mixed-type datasets.
+
+#### Number of Features
+
+This characteristic describes dataset dimensionality.
+
+* **Low-dimensional:** Limited number of explanatory variables.
+* **High-dimensional:** Large number of explanatory variables relative to the number of observations.
+
+High-dimensional datasets often require different reduction strategies than low-dimensional datasets.
+
+#### Number of Observations
+
+This characteristic describes dataset scale.
+
+* **Small-scale:** Limited number of observations.
+* **Large-scale:** Large number of observations.
+
+Sampling-based methods become particularly relevant as dataset size increases.
