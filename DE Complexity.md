@@ -364,7 +364,7 @@ Together, these indicators offer a more complete view of long-term computational
 
 The computational assessment generates three complementary visualizations intended for different levels of analysis.
 
-![Visualization Analysis](../images/Complexity.jpeg)
+![Visualization Analysis](./images/Complexity.jpeg)
 
 ## Heatmap Analysis
 
