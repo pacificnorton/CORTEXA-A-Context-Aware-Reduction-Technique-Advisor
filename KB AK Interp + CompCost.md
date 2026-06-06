@@ -1,3 +1,15 @@
+### Interpretation of Qualitative Scores
+
+- **Interpretability**
+  - **High:** The reduction process preserves original variables or instances, allowing straightforward explanation of results (e.g., MI, RFE, VT, Sampling methods).
+  - **Medium:** The reduction produces transformed representations or aggregated structures that remain partially interpretable (e.g., PCA, MCA, FAMD, Cluster Sampling).
+
+- **Computational Cost**
+  - **Low:** Linear-time or near-linear algorithms.
+  - **Medium:** Algorithms requiring pairwise statistics, clustering assignments, or matrix operations of moderate complexity.
+  - **High:** Iterative optimization, decomposition methods, or repeated model training procedures.
+
+
 | Method | Interpretability | Computational Cost |
 |----------|----------|----------|
 | PCA | Medium | Medium |
