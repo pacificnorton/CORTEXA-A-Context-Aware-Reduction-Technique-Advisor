@@ -1,0 +1,133 @@
+# Illustrative Example
+
+This example illustrates how CORTEXA transforms a dataset description and a user preference ranking into a recommendation list.
+
+## Dataset Context
+
+Consider a regression problem characterized by the following dataset profile:
+
+- Relationship linearity: Linear
+- Distribution normality: Normal
+- Data type: Numerical
+- Feature space: Large
+- Sample size: Small
+
+This profile corresponds to a high-dimensional numerical regression dataset with limited observations.
+
+## Candidate Reduction Methods
+
+Assume that the knowledge base initially identifies the following candidate methods:
+
+\[
+\mathcal{R} =
+\{
+\text{PCA},
+\text{RFE},
+\text{Random Sampling},
+\text{Variance Threshold},
+\text{MCA}
+\}.
+\]
+
+Not all methods are compatible with the dataset profile.
+
+For example, Multiple Correspondence Analysis (MCA) is designed for categorical variables and therefore cannot be applied to a numerical dataset. It is automatically excluded during the compatibility verification stage.
+
+The admissible method set becomes:
+
+\[
+\mathcal{R}_{p}
+=
+\{
+\text{PCA},
+\text{RFE},
+\text{Random Sampling},
+\text{Variance Threshold}
+\}.
+\]
+
+## Multi-Objective Evaluation
+
+Each admissible method has previously been evaluated during the offline knowledge-base construction process.
+
+For the considered profile, suppose the following normalized objective values are available:
+
+| Method | Utility | Interpretability | Reduction Effectiveness | Computational Cost |
+|----------|----------|----------|----------|----------|
+| PCA | 0.92 | 0.30 | 0.80 | 0.40 |
+| RFE | 0.90 | 0.90 | 0.60 | 0.70 |
+| Random Sampling | 0.85 | 1.00 | 0.40 | 0.90 |
+| Variance Threshold | 0.88 | 0.85 | 0.50 | 0.60 |
+
+Higher values are preferred for all objectives.
+
+## Trade-Off Identification
+
+Variance Threshold is dominated by RFE because RFE achieves better results on every objective:
+
+| Objective | RFE | Variance Threshold |
+|------------|------------|------------|
+| Utility | 0.90 | 0.88 |
+| Interpretability | 0.90 | 0.85 |
+| Reduction Effectiveness | 0.60 | 0.50 |
+| Computational Cost | 0.70 | 0.60 |
+
+Since Variance Threshold does not offer any unique trade-off, it is removed from consideration.
+
+The remaining alternatives are:
+
+\[
+\{
+\text{PCA},
+\text{RFE},
+\text{Random Sampling}
+\}.
+\]
+
+Each of these methods provides a different balance between predictive utility, interpretability, reduction effectiveness, and computational cost.
+
+## User Preference Ranking
+
+Assume the user specifies the following priority order:
+
+\[
+\text{Utility}
+\succ
+\text{Interpretability}
+\succ
+\text{Computational Cost}
+\succ
+\text{Reduction Effectiveness}
+\]
+
+This indicates that predictive performance is the most important objective.
+
+## Lexicographic Recommendation
+
+The recommendation engine compares methods according to the user priorities.
+
+PCA is ranked first because it achieves the highest utility score.
+
+Although Random Sampling offers better interpretability and computational cost than RFE, RFE is preferred because utility has higher priority in the user's ranking.
+
+The final recommendation list is therefore:
+
+\[
+\mathcal{L}^{*}
+=
+(
+\text{PCA},
+\text{RFE},
+\text{Random Sampling}
+)
+\]
+
+## Interpretation
+
+This example highlights the three main principles underlying CORTEXA:
+
+1. Dataset characteristics determine which reduction methods are technically admissible.
+2. Multi-objective evaluation identifies meaningful trade-offs between competing methods.
+3. User preferences transform these trade-offs into a personalized recommendation ranking through lexicographic selection.
+
+The recommendation is therefore both context-aware and preference-aware, while avoiding arbitrary objective weighting.
