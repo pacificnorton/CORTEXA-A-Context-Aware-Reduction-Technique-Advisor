@@ -13,7 +13,7 @@ CORTEXA addresses this challenge by providing a decision-support framework capab
 
 ## System Architecture
 
-![CORTEXA Architecture](images/Architecture.jpeg)
+![CORTEXA Architecture](images/Architecture.png)
 
 CORTEXA consists of three main components:
 
