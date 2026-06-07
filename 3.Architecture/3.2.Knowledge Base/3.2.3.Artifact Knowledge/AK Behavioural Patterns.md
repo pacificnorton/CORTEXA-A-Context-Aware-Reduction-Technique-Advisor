@@ -55,15 +55,14 @@ This allows the knowledge base to represent multiple valid reduction behaviours 
 
 Each performance vector is represented as a point in the multi-objective space:
 
-[
-\mathbf{z}
-==========
+$$
+\mathbf{z} =
 
 (z_{perf},
 z_{red},
 z_{int},
 z_{cost})
-]
+$$
 
 where:
 
