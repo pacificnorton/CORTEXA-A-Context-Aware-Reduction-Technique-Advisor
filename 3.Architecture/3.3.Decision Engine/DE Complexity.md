@@ -36,9 +36,9 @@ For every considered method, a complexity function was derived from the literatu
 
 Formally, for a reduction method (r), the complexity model can be represented as
 
-[
+$$
 C_r = f_r(n,p,\ldots),
-]
+$$
 
 where (C_r) denotes the estimated number of operations required by the method and (f_r) represents its complexity function.
 
@@ -50,19 +50,19 @@ Here are the algorithmical complexities considered in this work :
 
 | Method | Standard Complexity | Variables | Basic Justification | More Precise Complexity | Why / Justification |
 |----------|----------|----------|----------|----------|----------|
-| PCA | \(O(\min(n^2p,\;np^2))\) | \(n\): samples, \(p\): features | PCA is computed via SVD of the centered data matrix. | \(O(\min(n^2p,\;np^2))\) | The standard formula is already the precise one for dense full SVD. It comes directly from LAPACK/Golub-SVD complexity analysis. |
-| MCA | \(O(nK^2)\) | \(n\): samples, \(K\): binary variables after one-hot encoding | MCA performs SVD on the indicator matrix. | \(O(\min(n^2K,\;nK^2))\) | More precise because SVD cost depends on whether \(n>K\) or \(K>n\). The earlier formula assumes \(K<n\). |
-| FAMD | \(O(nK^2 + np^2)\) | \(K\): encoded categorical dimensions, \(p\): numerical features | FAMD combines MCA and PCA. | \(O(\min(n^2K,\;nK^2)+\min(n^2p,\;np^2))\) | More precise because both the MCA and PCA stages have shape-dependent SVD costs. |
-| LDA | \(O(cp^2+p^3)\) | \(c\): classes, \(p\): features | Compute class statistics and eigendecomposition. | \(O(np^2+cp^2+p^3)\) | More precise because covariance estimation requires scanning all \(n\) samples before eigendecomposition. |
-| Truncated SVD | \(O(npk)\) | \(n\): samples, \(p\): features, \(k\): retained components | Iterative decomposition of top singular vectors. | \(O(qnpk)\) | More precise because randomized/Lanczos SVD needs \(q\) power iterations (typically \(q=2\)–10) to converge. |
-| RFE | \(O(k\,T_{\text{model}}(n,p))\) | \(k\): elimination iterations, \(T_{\text{model}}\): training cost | Retrains model at each elimination step. | \(O\!\left(\sum_{i=1}^{k} T_{\text{model}}(n,p_i)\right)\) | More precise because the number of features decreases at each iteration (\(p_1>p_2>\cdots\)). Training cost is not constant. |
-| MI | \(O(p\,n\log n)\) | \(p\): features, \(n\): samples | One MI score per feature. | \(O\!\left(\sum_{j=1}^{p} n\log n\right)=O(p\,n\log n)\) | Same asymptotic result, but explicitly shows independent per-feature computation. |
-| VT | \(O(np)\) | \(n\): samples, \(p\): features | Compute feature variances. | \(O(np)+O(p)\) | Additional threshold comparison step exists, though dominated by variance computation. |
-| Correlation Filter | \(O(p^2n)\) | \(p\): features, \(n\): samples | Compute all pairwise correlations. | \(O\!\left(\frac{p(p-1)}{2}n\right)\) | More precise because there are exactly \(\frac{p(p-1)}{2}\) feature pairs. |
-| Cluster Sampling | \(O(N)+O(c\,n_c)\) | \(N\): population, \(c\): clusters, \(n_c\): sampled items per cluster | Assign clusters then sample. | \(O(N+c+n_c\,c)\) | More precise because cluster indexing/selection has separate overhead before sample extraction. |
-| Stratified Sampling | \(O(N+g\,n_g)\) | \(g\): strata, \(n_g\): sampled per stratum | Assign strata then sample. | \(O\!\left(N+g+\sum_{i=1}^{g} n_i\right)\) | More precise because strata may have unequal sample sizes. |
-| Random Sampling | \(O(n)\) | \(n\): sample size | Random draw. | \(O(n)\) or \(O(N)\) | Depends on implementation: direct index generation vs shuffling the full population. |
-| Systematic Sampling | \(O(n)\) | \(n\): sample size | Select every \(k\)-th item. | \(O(n)+O(N_{\text{sort}})\) | If the population is already ordered, only selection is needed; otherwise preprocessing/sorting may dominate. |
+| PCA | $O(\min(n^2p,\;np^2))$ | $n$: samples, $p$: features | PCA is computed via SVD of the centered data matrix. | $O(\min(n^2p,\;np^2))$ | The standard formula is already the precise one for dense full SVD. It comes directly from LAPACK/Golub-SVD complexity analysis. |
+| MCA | $O(nK^2)$ | $n$: samples, $K$: binary variables after one-hot encoding | MCA performs SVD on the indicator matrix. | $O(\min(n^2K,\;nK^2))$ | More precise because SVD cost depends on whether $n>K$ or $K>n$. The earlier formula assumes $K<n$. |
+| FAMD | $O(nK^2 + np^2)$ | $K$: encoded categorical dimensions, $p$: numerical features | FAMD combines MCA and PCA. | $O(\min(n^2K,\;nK^2)+\min(n^2p,\;np^2))$ | More precise because both the MCA and PCA stages have shape-dependent SVD costs. |
+| LDA | $O(cp^2+p^3)$ | $c$: classes, $p$: features | Compute class statistics and eigendecomposition. | $O(np^2+cp^2+p^3)$ | More precise because covariance estimation requires scanning all $n$ samples before eigendecomposition. |
+| Truncated SVD | $O(npk)$ | $n$: samples, $p$: features, $k$: retained components | Iterative decomposition of top singular vectors. | $O(qnpk)$ | More precise because randomized/Lanczos SVD needs $q$ power iterations (typically $q=2$–10) to converge. |
+| RFE | $O(k\,T_{\text{model}}(n,p))$ | $k$: elimination iterations, $T_{\text{model}}$: training cost | Retrains model at each elimination step. | $O\!\left(\sum_{i=1}^{k} T_{\text{model}}(n,p_i)\right)$ | More precise because the number of features decreases at each iteration ($p_1>p_2>\cdots$). Training cost is not constant. |
+| MI | $O(p\,n\log n)$ | $p$: features, $n$: samples | One MI score per feature. | $O\!\left(\sum_{j=1}^{p} n\log n\right)=O(p\,n\log n)$ | Same asymptotic result, but explicitly shows independent per-feature computation. |
+| VT | $O(np)$ | $n$: samples, $p$: features | Compute feature variances. | $O(np)+O(p)$ | Additional threshold comparison step exists, though dominated by variance computation. |
+| Correlation Filter | $O(p^2n)$ | $p$: features, $n$: samples | Compute all pairwise correlations. | $O\!\left(\frac{p(p-1)}{2}n\right)$ | More precise because there are exactly $\frac{p(p-1)}{2}$ feature pairs. |
+| Cluster Sampling | $O(N)+O(c\,n_c)$ | $N$: population, $c$: clusters, $n_c$: sampled items per cluster | Assign clusters then sample. | $O(N+c+n_c\,c)$ | More precise because cluster indexing/selection has separate overhead before sample extraction. |
+| Stratified Sampling | $O(N+g\,n_g)$ | $g$: strata, $n_g$: sampled per stratum | Assign strata then sample. | $O\!\left(N+g+\sum_{i=1}^{g} n_i\right)$ | More precise because strata may have unequal sample sizes. |
+| Random Sampling | $O(n)$ | $n$: sample size | Random draw. | $O(n)$ or $O(N)$ | Depends on implementation: direct index generation vs shuffling the full population. |
+| Systematic Sampling | $O(n)$ | $n$: sample size | Select every $k$-th item. | $O(n)+O(N_{\text{sort}})$ | If the population is already ordered, only selection is needed; otherwise preprocessing/sorting may dominate. |
 
 ---
 
@@ -84,9 +84,9 @@ The feature configurations represent increasing levels of structural complexity:
 
 For each feature configuration, three observation levels are considered:
 
-[
+$$
 n = N \in {100,;5000,;20000}.
-]
+$$
 
 The resulting design enables the assessment of both moderate and substantial increases in dataset size while preserving consistency across reduction methods.
 
@@ -104,23 +104,23 @@ Random Sampling is selected as the baseline method due to its simplicity and com
 
 Let (C_r) denote the operation count of method (r) and (C_{\mathrm{RS}}) the operation count of Random Sampling for the same scenario. The relative complexity ratio is computed as
 
-[
+$$
 R_r=\frac{C_r}{C_{\mathrm{RS}}}.
-]
+$$
 
 This ratio expresses the computational effort required by a method relative to the baseline.
 
 A value of
 
-[
+$$
 R_r = 1
-]
+$$
 
 indicates complexity equivalent to Random Sampling, whereas
 
-[
+$$
 R_r = 100
-]
+$$
 
 indicates a method requiring approximately one hundred times more operations under the same conditions.
 
@@ -150,29 +150,29 @@ To address this issue, a logarithmic transformation is applied to the relative c
 
 For a method (r), the transformed value is computed as
 
-[
+$$
 L_r = \log_{10}(R_r).
-]
+$$
 
 The logarithmic scale preserves relative differences while compressing extreme values into a more interpretable range.
 
 For example,
 
-[
+$$
 \log_{10}(1)=0,
-]
+$$
 
-[
+$$
 \log_{10}(10)=1,
-]
+$$
 
-[
+$$
 \log_{10}(100)=2,
-]
+$$
 
-[
+$$
 \log_{10}(1000)=3.
-]
+$$
 
 Consequently, equal distances on the transformed scale correspond to equal multiplicative increases in computational effort.
 
@@ -238,9 +238,9 @@ Absolute operation counts can differ by several orders of magnitude, making dire
 
 To facilitate interpretation, all methods are evaluated relative to a baseline reference method:
 
-[
+$$
 r_i=\frac{C_i}{C_{\text{baseline}}}
-]
+$$
 
 where:
 
@@ -251,9 +251,9 @@ The ratio (r_i) indicates how many times more computational effort a method requ
 
 For example:
 
-[
+$$
 r_i = 100
-]
+$$
 
 means that the method is expected to require approximately one hundred times more elementary operations than random sampling under the same dataset conditions.
 
@@ -320,23 +320,23 @@ The scalability assessment evaluates how rapidly computational effort increases 
 
 Let:
 
-[
+$$
 C_{\text{small}}
-]
+$$
 
 denote the operation count obtained in the smallest scenario and
 
-[
+$$
 C_{\text{large}}
-]
+$$
 
 the operation count obtained in the largest scenario.
 
 The scalability growth factor is defined as
 
-[
+$$
 G=\frac{C_{\text{large}}}{C_{\text{small}}}
-]
+$$
 
 A lower value of (G) indicates that computational requirements increase slowly as datasets grow, whereas higher values reveal methods whose resource demands escalate rapidly.
 
