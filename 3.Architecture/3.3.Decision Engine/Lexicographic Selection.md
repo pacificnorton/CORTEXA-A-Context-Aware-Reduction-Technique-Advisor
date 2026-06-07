@@ -23,9 +23,9 @@ Lexicographic selection ranks alternatives according to a user-defined priority 
 
 Let
 
-```
+$$
 Π = (o₁, o₂, o₃, o₄)
-```
+$$
 
 denote the ordered list of objectives specified by the user.
 
