@@ -1,0 +1,83 @@
+For a GitHub companion, I would make the **Decision Engine README** focused on its role, inputs, outputs, and internal components. The detailed theory can remain in the individual files.
+
+Something like this:
+
+# Decision Engine
+
+The Decision Engine is the online component of **CORTEXA**. Its role is to transform the user's analytical context into a ranked list of reduction-method recommendations.
+
+Unlike traditional optimization approaches that search directly for a solution, the Decision Engine relies on the behavioural knowledge previously extracted and stored in the Knowledge Base. This allows recommendations to be generated in real time without executing reduction methods or training analytical models during recommendation.
+
+## Inputs
+
+The Decision Engine requires three categories of inputs:
+
+### Dataset Properties
+
+The statistical properties of the dataset:
+
+* Presence of linear relationships (Yes / No)
+* Presence of normal distribution (Yes / No)
+* Data type (Numerical, Categorical, Mixed)
+* Dataset size
+
+### Analytical Task
+
+The intended predictive task:
+
+* Classification
+* Regression
+
+### Objective Priorities
+
+The user specifies an ordered priority ranking over the four objectives:
+
+1. Performance Preservation
+2. Reduction Volume
+3. Interpretability
+4. Computational Cost
+
+This priority ordering is central to the recommendation process, as different orderings may lead to different recommended methods.
+
+## Outputs
+
+The Decision Engine returns:
+
+- A ranked list of compatible reduction methods
+- A radar-chart representation of the trade-offs
+- A textual explanation for each recommendation
+- A resource efficeincy score
+- A scalability score
+
+## Internal Components
+
+The Decision Engine is composed of three main modules.
+
+### Lexicographic Selection
+
+This module ranks Pareto-optimal behavioural profiles according to the user-defined objective priorities.
+
+It ensures that the recommendation process remains aligned with user preferences while preserving the trade-offs identified during the offline evaluation phase.
+
+### Explicability Module
+
+The explicability module provides visual and textual justifications for recommendations.
+
+It explains:
+
+- why a method is compatible with the current context,
+- why it appears among the recommended methods,
+- and how the user-defined priorities influenced its ranking.
+
+### Ressource Efficiency Indicators
+
+
+## Recommendation Workflow
+
+The recommendation process follows four steps:
+
+1. Identify behavioural profiles compatible with the dataset properties and analytical task.
+2. Retain only Pareto-optimal profiles.
+3. Apply lexicographic ranking according to the user-defined objective priorities.
+4. Generate explanations and visual trade-off summaries.
+5. Display ressource efficiency indicators (present and future)
