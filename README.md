@@ -32,7 +32,7 @@ CORTEXA consists of three main components:
   - [Decision Engine](3.Architecture/3.3.Decision%20Engine/3.3.1.DE%20README.md)
     - [Lexicographic Selection](3.Architecture/3.3.Decision%20Engine/3.3.2.DE%20Lexicographic%20Selection.md)
     - [Explicability Module](3.Architecture/3.3.Decision%20Engine/3.3.3.DE%20Explicability%20Module.md)
-    - [Complexity Indicators](3.Architecture/3.3.Decision%20Engine/3.3.4.DE%20Resource%20Efficiency.md)
+    - [Resource Efficiency Indicators](3.Architecture/3.3.Decision%20Engine/3.3.4.DE%20Resource%20Efficiency.md)
 - [Evaluation](4.Evaluation/) - Contains the validation studies performed on:
   - [Classification](4.Evaluation/4.1.Classification.md)
   - [Regression](4.Evaluation/4.2.Regression.md)
