@@ -57,7 +57,6 @@ Each performance vector is represented as a point in the multi-objective space:
 
 $$
 \mathbf{z} =
-
 (z_{perf},
 z_{red},
 z_{int},
