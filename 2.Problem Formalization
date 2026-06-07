@@ -1,1 +1,144 @@
+# Problem Formalization
 
+## Motivation
+
+The effectiveness of a data reduction method depends on both the characteristics of the dataset and the intended analytical task. Furthermore, reduction techniques often exhibit conflicting strengths and weaknesses. Methods that preserve predictive performance may provide limited reduction, whereas methods achieving stronger reduction may sacrifice interpretability or computational efficiency.
+
+Consequently, selecting a reduction method can be formulated as a context-aware multi-objective decision problem. Rather than searching for a universally optimal technique, CORTEXA aims to identify the reduction methods that best match a given analytical context and a user's objective priorities.
+
+---
+
+## Analytical Context
+
+Let
+
+[
+C=(P_D,T)
+]
+
+denote the analytical context.
+
+The dataset profile (P_D) describes the statistical and structural characteristics of the dataset through the dimensions considered by CORTEXA:
+
+* relationship linearity;
+* distribution normality;
+* feature-type composition;
+* dimensionality;
+* dataset size.
+
+The analytical task belongs to
+
+[
+T={\textit{classification},\textit{regression}}.
+]
+
+Together, (P_D) and (T) define the operational context within which reduction methods are evaluated.
+
+---
+
+## Candidate Reduction Methods
+
+Let
+
+[
+M={m_1,m_2,\ldots,m_k}
+]
+
+denote the set of candidate reduction methods.
+
+The set includes:
+
+* feature-selection techniques;
+* dimensionality-reduction techniques;
+* sampling methods;
+* hybrid reduction strategies obtained by combining compatible methods from different reduction families.
+
+Although these approaches operate on different aspects of the data, they are considered jointly because they represent alternative strategies for reducing data volume and complexity.
+
+---
+
+## Objective Space
+
+Each reduction method is evaluated according to a common objective space
+
+[
+O=
+{
+o_{perf},
+o_{red},
+o_{int},
+o_{cost}
+}.
+]
+
+The objectives correspond respectively to:
+
+* predictive-performance preservation;
+* reduction effectiveness;
+* interpretability;
+* computational efficiency.
+
+These objectives capture the principal trade-offs reported in the data-reduction literature.
+
+---
+
+## Behavioural Profiles
+
+For a given analytical context (C), each method exhibits a characteristic behavioural profile
+
+[
+B(m,C)
+======
+
+(
+b_{perf},
+b_{red},
+b_{int},
+b_{cost}
+).
+]
+
+This vector summarizes the observed behaviour of method (m) under context (C) with respect to the objectives defined in (O).
+
+The behavioural profiles stored in the knowledge base are obtained through the offline evaluation process described in the companion documentation. They represent empirical observations collected across a large set of controlled dataset conditions.
+
+---
+
+## Preference-Aware Recommendation
+
+Users express their priorities through a preference ordering
+
+[
+\Pi=
+(o_{i_1},o_{i_2},o_{i_3},o_{i_4})
+]
+
+which defines the relative importance assigned to the optimization objectives.
+
+Given an analytical context (C=(P_D,T)) and a preference ordering (\Pi), the objective of CORTEXA is to identify the subset
+
+[
+M^* \subseteq M
+]
+
+whose behavioural profiles best align with the specified priorities.
+
+Rather than aggregating objectives through weighted scoring functions, CORTEXA relies on lexicographic decision rules. Candidate methods are compared according to the most important objective. Ties are resolved using the second objective, followed by the third and fourth objectives if necessary.
+
+This strategy preserves the priority structure explicitly specified by the user while avoiding arbitrary weight calibration.
+
+---
+
+## Recommendation Output
+
+The recommendation process produces an ordered list of reduction methods
+
+[
+L=(m_1,m_2,\ldots,m_n)
+]
+
+representing the alternatives that best satisfy the user-defined priorities within the considered analytical context.
+
+The recommendation is accompanied by explanatory information describing the behavioural characteristics of the selected methods and the reasons underlying their ranking.
+
+Additional computational indicators such as resource-efficiency and scalability assessments may also be provided as complementary decision-support information. These indicators are not part of the optimization model itself and therefore do not influence the recommendation outcome.
