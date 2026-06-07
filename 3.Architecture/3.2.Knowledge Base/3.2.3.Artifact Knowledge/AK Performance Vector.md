@@ -1,4 +1,14 @@
-### Interpretation of Qualitative Scores
+### Computation of the Performance Vector
+
+- **Performance**
+We have build 2 Model Assessment funcitons in order to evaluate the performance, one for each analytical task considered in this work.
+
+***Classification***
+
+***Regression***
+
+- **Reduction Efficiency**
+
 
 - **Interpretability**
   - **High:** The reduction process preserves original variables or instances, allowing straightforward explanation of results (e.g., MI, RFE, VT, Sampling methods).
@@ -34,3 +44,4 @@
 | Systematic Sampling (Mixed) | High | Low |
 | Systematic Sampling (Numerical) | High | Low |
 | Systematic Sampling (Categorical) | High | Low |
+
