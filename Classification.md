@@ -1,72 +1,109 @@
-# Recommending-Context-Aware-Data-Reductions
-
-This repository presents the technical architecture and experimentatal results of the Recommending Contex-Aware Data Reductions.
-The objective is to demonstrate the design rationale, architectural components, and empirical performance of the proposed system.
-
----
-
-## Project Overview
-
-Recommending Context-Aware Data Reductions adresses the challenge of selecting the most suitable reduction technique for a specific technical context, analytical task and user priorities in terms of efficiency objectives. It combines a structures knowledge base that acts as a rule-based filtering, a clustering model to identify the reduction techniques sharing similar profiles in terms of technical performance, a Pareto function to discern the best trade-offs among objectives, and a lexicographic ranking scheme to prioritize methods according to user-defined preferences. Experimental evaluations on real-world datasets demonstrate that our approach reliably recommends the most appropriate techniques for the technical framework specified by the user, including the usage purpose, and their priorities in terms of efficiency objectives.
-
-Key Contributions :
-
----
-
-## Technical Architecture 
-
-The solution is composed of the following primary components:
-
-1. **User Input
-   - Handles the collection of user input
-   - Two types od user input :
-     ° Techincal - for the properties of the dataset he wants to reduce and the analytical task as data usage objective
-     ° Priority - for the ranking of the efficiency objectives desired
-     
-2. **Data Layer
-   - Descriptive meta-data relative to data reduction techniques
-   - Analytical insights derived from the scientific litterature
-   - Empirical performance metrics obtained through systematic iexperimentation on synthetic datasets
-     
-3. **Core Processing Engine
-   - Clustering for identifying the groups of reduction techniques evaluations that share similar performance profiles for a given dataset profile, defined by the technical input of the user
-   - Identifying Pareto-Optimal solutions to cover the trade-offs among efficiency objectives
-   - Lexicographic Selection for ranking
-
-> A detailed schematic of the architecture is provided in the '/architecture/' folder.
-
----
+# Classification Experimentation
 
 ## Experimental Setup and Results
 
-Experiments were conducted to evaluate the system's performance on the following task:
+Experiments were conducted to evaluate the system's performance on the following objectives:
 
-- [Task 1: ensure exhaustive coverage of the system's defined technical scenarios]
-- [Task 2: demonstrate the cross-domain generalizability of our approach through its application to heterogeneous datasets]
-- [Task 3: empirically assess the pertinence of the generated reduction suggestions, both in terms of alignment with technical compatibility and preservation of task-specific performance]
-
-### Datasets
-
-- [Heart Attack Prediction](https://www.kaggle.com/datasets/juledz/heart-attack-prediction)
-- [Hotel Booking](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
-- [Housing](https://www.kaggle.com/datasets/camnugent/california-housing-prices)
-- [Company Bankruptcy Prediction](https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction)
-- [Mushrooms Classification](https://www.kaggle.com/datasets/uciml/mushroom-classification)
-- [Boston House Pricing](https://www.kaggle.com/datasets/fedesoriano/the-boston-houseprice-data)
-- [Students Performance](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
-
-### Evaluation Metrics 
-
-Performance based scoring function
-  ° input: Accuracy, Precision, Recall, F1-score, and ROC AUC
-  ° output: General score to asses whether a dataset remains suitable for classification
-
-Full details can be found in the 'EvaluationMetrics.md' file.
-
-### Summary of Results
-
-Full experimental details can be found in the 'FinalResults.md' file.
+* **Task 1:** Ensure exhaustive coverage of the system's defined technical scenarios.
+* **Task 2:** Demonstrate the cross-domain generalizability of the approach through its application to heterogeneous datasets.
+* **Task 3:** Empirically assess the pertinence of the generated reduction recommendations in terms of technical compatibility, reduction effectiveness, interpretability, computational efficiency, and predictive-performance preservation.
 
 ---
 
-# Repository Structure
+## Datasets
+
+Seven real-world datasets were selected from diverse application domains in order to evaluate the decision-support system under realistic conditions.
+
+| Dataset                       | Domain         |
+| ----------------------------- | -------------- |
+| Heart Attack Prediction       | Healthcare     |
+| Hotel Booking Demand          | Tourism        |
+| California Housing            | Social Studies |
+| Company Bankruptcy Prediction | Finance        |
+| Mushroom Classification       | Agriculture    |
+| Boston House Pricing          | Real Estate    |
+| Students Performance          | Education      |
+
+### Dataset Sources
+
+* Heart Attack Prediction: https://www.kaggle.com/datasets/juledz/heart-attack-prediction
+* Hotel Booking Demand: https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand
+* California Housing: https://www.kaggle.com/datasets/camnugent/california-housing-prices
+* Company Bankruptcy Prediction: https://www.kaggle.com/datasets/fedesoriano/company-bankruptcy-prediction
+* Mushroom Classification: https://www.kaggle.com/datasets/uciml/mushroom-classification
+* Boston House Pricing: https://www.kaggle.com/datasets/fedesoriano/the-boston-houseprice-data
+* Students Performance: https://www.kaggle.com/datasets/spscientist/students-performance-in-exams
+
+---
+
+## Evaluation Scenarios
+
+The online evaluation serves two complementary objectives:
+
+1. Assess whether the recommendations generated by CORTEXA remain consistent with the technical requirements imposed by dataset characteristics.
+2. Verify that recommended reduction methods preserve predictive quality while providing meaningful reductions under diverse statistical and structural conditions.
+
+Each dataset was mapped to one of the admissible dataset profiles defined in the technical space. These profiles combine linearity assumptions, normality conditions, feature-type composition, dataset scale, and user priorities.
+
+### Scenario Definitions
+
+| ID | Dataset                       | Domain         | L   | N   | C           | F     | O     | Priority Order                                    |
+| -- | ----------------------------- | -------------- | --- | --- | ----------- | ----- | ----- | ------------------------------------------------- |
+| H  | Heart Attack Prediction       | Healthcare     | Yes | No  | Mixed       | Small | Small | Reduction → Interpretability → Performance → Cost |
+| T  | Hotel Booking Prediction      | Tourism        | No  | No  | Mixed       | Big   | Big   | Cost → Performance → Reduction → Interpretability |
+| S  | Housing                       | Social Studies | Yes | Yes | Numerical   | Small | Big   | Performance → Cost → Reduction → Interpretability |
+| F  | Company Bankruptcy Prediction | Finance        | No  | No  | Numerical   | Big   | Big   | Performance → Cost → Reduction → Interpretability |
+| A  | Mushroom Classification       | Agriculture    | No  | No  | Categorical | Big   | Big   | Cost → Performance → Reduction → Interpretability |
+| R  | Boston House Pricing          | Real Estate    | Yes | No  | Numerical   | Small | Small | Performance → Interpretability → Reduction → Cost |
+| E  | Students Performance          | Education      | Yes | Yes | Mixed       | Small | Small | Reduction → Performance → Interpretability → Cost |
+
+Where:
+
+* **L** = Linearity
+* **N** = Normality
+* **C** = Feature composition
+* **F** = Feature-scale category
+* **O** = Observation-scale category
+
+---
+
+## User Priority Structures
+
+To approximate realistic decision-making conditions, each dataset was associated with a priority ordering reflecting the objectives typically emphasized in its application domain.
+
+Examples include:
+
+* Healthcare applications favouring interpretability and reduction.
+* Financial applications prioritising predictive performance.
+* Operational domains emphasising computational efficiency.
+* Educational analytics balancing reduction effectiveness and predictive quality.
+
+These priorities are supplied to the Decision Engine and determine the lexicographic ranking applied during recommendation generation.
+
+---
+
+## Results
+
+For each dataset, the first row corresponds to the baseline model trained on unreduced data. The subsequent rows present the reduction methods recommended by CORTEXA, ranked according to the user-defined objective priorities.
+
+
+
+---
+
+## Discussion
+
+The evaluation confirms three important properties of CORTEXA.
+
+### Technical Coherence
+
+All recommended methods satisfy the compatibility constraints associated with the corresponding dataset profiles. No recommendation violates the assumptions encoded in the method profiles stored within the Knowledge Base.
+
+### Cross-Domain Generalisation
+
+The system successfully generates recommendations across heterogeneous domains including healthcare, tourism, finance, agriculture, education, social studies, and real estate. This demonstrates that recommendations depend on dataset characteristics rather than application domain.
+
+### Preference Sensitivity
+
+Recommendations vary according to the priority ordering specified by the user. Datasets emphasising computational efficiency favour sampling-based reductions, whereas performance-oriented scenarios favour dimensionality-reduction and feature-selection techniques. This behaviour confirms that preference-based decision making is performed explicitly during the online phase rather than being hard-coded during Knowledge Base construction.
+
+Overall, the results demonstrate that CORTEXA produces context-aware recommendations that remain technically valid, align with user priorities, and preserve predictive quality while achieving meaningful dataset reduction.
