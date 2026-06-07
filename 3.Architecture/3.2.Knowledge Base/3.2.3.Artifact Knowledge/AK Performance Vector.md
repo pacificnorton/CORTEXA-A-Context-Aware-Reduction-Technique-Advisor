@@ -1,9 +1,9 @@
-### Computation of the Performance Vector
+# Computation of the Performance Vector
 
-**Performance**
+## Performance ##
 We have build 2 Model Assessment funcitons in order to evaluate the performance, one for each analytical task considered in this work.
 
-***Classification***
+### ***Classification***
 
 Predictive performance for Classification is assessed by training Logistic Regression, Decision Tree, and XGBoost classifiers on both the original and reduced datasets using stratified 5-fold cross-validation. The five required metrics (Accuracy, Precision, Recall, F1-score, ROC-AUC) are averaged and converted into an accept/reject decision using the following rule-based scoring scheme:
 
@@ -28,7 +28,7 @@ Predictive performance for Classification is assessed by training Logistic Regre
 
 Among the three classifiers, only the best-performing one contributes to the final decision.
 
-***Regression***
+### ***Regression***
 
 The objective of the performance assessment function is to evaluate whether a reduction method preserves the predictive capability of the original dataset for regression tasks after reduction.
 
@@ -49,69 +49,59 @@ These metrics jointly assess explanatory power, predictive accuracy, and numeric
 
 A composite regression score is then computed as:
 
-\[
-Score_{reg}
-=
-Score_{R^2}
-+
-Score_{RMSE}
-+
-Score_{MAE}
-\]
+$$
+Score_{reg} = Score_{R^2} + Score_{RMSE} + Score_{MAE}
+$$
 
-The contribution of the \(R^2\) metric is defined as:
+The contribution of the $R^2$ metric is defined as:
 
-\[
-Score_{R^2}
-=
+$$
+Score_{R^2} =
 \begin{cases}
 0, & R^2 < 0.60 \\
 R^2, & 0.60 \leq R^2 < 0.80 \\
 2R^2, & R^2 \geq 0.80
 \end{cases}
-\]
+$$
 
 The contribution of the RMSE metric is defined as:
 
-\[
-Score_{RMSE}
-=
+$$
+Score_{RMSE} =
 \begin{cases}
 0, & RMSE > 0.50 \\
 (1-RMSE), & 0.25 < RMSE \leq 0.50 \\
 2(1-RMSE), & RMSE \leq 0.25
 \end{cases}
-\]
+$$
 
 The contribution of the MAE metric is defined as:
 
-\[
-Score_{MAE}
-=
+$$
+Score_{MAE} =
 \begin{cases}
 0, & MAE > 0.50 \\
 (1-MAE), & 0.25 < MAE \leq 0.50 \\
 2(1-MAE), & MAE \leq 0.25
 \end{cases}
-\]
+$$
 
 The final regression score is therefore obtained by aggregating the three metric-specific contributions:
 
-\[
-Score_{reg}
-=
+$$
+Score_{reg} =
 Score_{R^2}
 +
 Score_{RMSE}
 +
 Score_{MAE}
-\]
+$$
 
 A reduction method is considered to preserve predictive performance when:
 
-\[
+$$
 Score_{reg} \geq 1.5
-\]
+$$
 
 This threshold prevents situations where excellent performance on a single metric compensates for severe weaknesses on the others. Consequently, accepted methods must simultaneously exhibit sufficient explanatory power, predictive accuracy, and numerical stability.
 
@@ -119,14 +109,21 @@ When multiple regressors are evaluated, the final performance assessment associa
 
 
 
-**Reduction Efficiency**
+## Reduction Efficiency
+We compare the 
+$(F x O) - (F_r x O_r)$ 
+where:
 
+  - $F$ = Number of Features of the initial dataset
+  - $O$ = Number of Observations of the initial dataset
+  - $F_r$ = Number of Features of the reduced dataset
+  - $O_r$ = Number of Observations of the reduced dataset
 
-**Interpretability**
+## Interpretability
   - **High:** The reduction process preserves original variables or instances, allowing straightforward explanation of results (e.g., MI, RFE, VT, Sampling methods).
   - **Medium:** The reduction produces transformed representations or aggregated structures that remain partially interpretable (e.g., PCA, MCA, FAMD, Cluster Sampling).
 
-**Computational Cost**
+## Computational Cost
   - **Low:** Linear-time or near-linear algorithms.
   - **Medium:** Algorithms requiring pairwise statistics, clustering assignments, or matrix operations of moderate complexity.
   - **High:** Iterative optimization, decomposition methods, or repeated model training procedures.
