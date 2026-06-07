@@ -13,7 +13,7 @@ CORTEXA addresses this challenge by providing a decision-support framework capab
 
 ## System Architecture
 
-![CORTEXA Architecture](Architecture/Figures/CORTEXA-Architecture.png)
+![CORTEXA Architecture](images/Architecture.jpeg)
 
 CORTEXA consists of three main components:
 
@@ -23,16 +23,19 @@ CORTEXA consists of three main components:
 
 ## Repository Structure
 
-- Methodology - Contains the conceptual foundations of CORTEXA.
-- Architecture - Contains detailed descriptions of:
-  - Knowledge Base
-  - Decision Engine
-  - User Interaction
-- Experiments - Contains the validation studies performed on:
-  - Classification tasks
-  - Regression tasks
-- Demonstration scenarios
-- Publications - Contains the papers associated with the project.
+- [Problem Formalization](1.Problem%20Formalization.md) - Contains the conceptual foundations of CORTEXA.
+- [Illustrative Example](2.Illustrative%20Example.md)
+- [Architecture](3.1.Architecture.md) - Contains detailed descriptions of:
+  - [Knowledge Base](3.Architecture/3.2.Knowledge%20Base/3.2.1.KB%20README.md)
+    - [Source Knowledge](3.Architecture/3.2.Knowledge%20Base/3.2.2.Source%20Knowledge/) (Definition of the [Dataset Profiles](3.Architecture/3.2.Knowledge%20Base/3.2.2.Source%20Knowledge/KB%20SK%20Dataset%20Profiles) and the [Reduction Methods](3.Architecture/3.2.Knowledge%20Base/3.2.2.Source%20Knowledge/KB%20SK%20Reduction%20Methods) considered in this work)
+    - [Artifact Knowledge](3.Architecture/3.2.Knowledge%20Base/3.2.3.Artifact%20Knowledge/) ([Synthetic Datasets Generation](3.Architecture/3.2.Knowledge%20Base/3.2.3.Artifact%20Knowledge/AK%20Synthetic%20Datasets), [Performance vector computation](3.Architecture/3.2.Knowledge%20Base/3.2.3.Artifact%20Knowledge/AK%20Performance%20Vector), [Behavioural Patterns Analysis](3.Architecture/3.2.Knowledge%20Base/3.2.3.Artifact%20Knowledge/AK%20Behavioural%20Patterns))
+  - [Decision Engine](3.Architecture/3.3.Decision%20Engine/)
+    - [Lexicographic Selection](3.Architecture/3.3.Decision%20Engine/3.3.2.Lexicographic%20Selection.md)
+    - [Explicability Module](3.Architecture/3.3.Decision%20Engine/3.3.3.Explicability%20Module.md)
+    - [Complexity Indicators](3.Architecture/3.3.Decision%20Engine/3.3.4.DE%20Complexity.md)
+- [Evaluation](4.Evaluation/) - Contains the validation studies performed on:
+  - [Classification](4.Evaluation/4.1.Classification.md)
+  - [Regression](4.Evaluation/4.2.Regression.md)
 
 ## Main Contributions
 
