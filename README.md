@@ -45,9 +45,7 @@ CORTEXA consists of three main components:
 - Preference-aware recommendation through lexicographic decision analysis.
 - Explainable recommendations supported by behavioural trade-off profiles.
 
-## Publications
-
 ## Demonstration
 
 Video:
-https://vimeo.com/1144995861
+[https://vimeo.com/1144995861](https://vimeo.com/1199081773)
