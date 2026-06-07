@@ -80,19 +80,20 @@ The centroid of each cluster is subsequently used as a compact representation of
 
 ## Figure 1 – Raw Performance Vectors
 
-*Insert screenshot showing the original performance vectors represented as points in the objective space.*
+![Class Diagram](../../../images/Vector.jpeg)
 
 This figure illustrates the diversity of observed reduction behaviours before behavioural analysis.
+Each point represents a performance vector in a three dimensional space, because a four dimentional vizualization would have been impossible.
 
 ---
 
 ## Figure 2 – Identified Behavioural Patterns
 
-*Insert screenshot showing clustered vectors using different colours.*
+![Class Diagram](../../../images/Cluster.jpeg)
+
+Next, the vectors are clusters in order to identify behavioural patters.
 
 Each colour represents a distinct behavioural pattern identified through clustering.
-
-Rather than storing hundreds of individual observations, the knowledge base stores these higher-level behavioural structures.
 
 ---
 
@@ -149,7 +150,7 @@ These profiles represent efficient trade-offs for which improvement on one objec
 
 ## Figure 3 – Pareto-Optimal Behavioural Patterns
 
-*Insert screenshot showing Pareto-optimal points highlighted in red.*
+![Class Diagram](../../../images/Pareto.jpeg)
 
 The highlighted points correspond to behavioural patterns retained in the final knowledge base.
 
