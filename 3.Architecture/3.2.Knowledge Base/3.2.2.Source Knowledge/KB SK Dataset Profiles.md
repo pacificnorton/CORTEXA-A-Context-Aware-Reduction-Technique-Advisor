@@ -4,9 +4,9 @@ Analytical contexts are represented through dataset profiles. A dataset profile 
 
 Each profile is defined as:
 
-[
+$$
 P_D=(T,L,N,Y,F,O)
-]
+$$
 
 where:
 
